@@ -25,10 +25,10 @@ A simple, responsive landing page built with Next.js. Includes a registration fo
 
 ## 📸 Demo
 
-- For a live demo visit:
-- To see the result in Airtable visit:
+- [For a live demo click here.](https://konimbo-landing-page-sandy.vercel.app/)
+- [To see the result in Airtable click here.](https://airtable.com/invite/l?inviteId=invqcvQRo9CCrFxs2&inviteToken=ae230e5da72d9ebe3e8be4afd293d3895bbca9be1d962f62ade54cd8fa062ff9&utm_medium=email&utm_source=product_team&utm_content=transactional-alerts)
 
-<img src="public/demo-screenshot.png" alt="Landing page preview" width="100%" />
+<img src="public/demo.png" alt="Landing page preview" width="100%" />
 
 ---
 
