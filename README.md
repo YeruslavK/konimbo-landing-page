@@ -47,20 +47,22 @@ cd landing-form
 # Using npm
 npm install
 
-# Using yarn
+# Or if youre using yarn
 yarn install
 ```
 
 ### 3. Create .env.local
 
 ```bash
-Create a file named .env.local in the root of the project and add your Airtable credentials:
+Create a file named **.env.local** in the root of the project and add your Airtable credentials:
 
+
+# Add in your .env.local
 AIRTABLE_API_KEY=your_airtable_api_key
 AIRTABLE_BASE_ID=your_base_id
 AIRTABLE_TABLE_NAME=your_table_name
 
-You can find these values in your Airtable API docs.
+# You can find these values in your Airtable API docs.
 ```
 
 ### 4. Run the App Locally
