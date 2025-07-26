@@ -39,15 +39,21 @@ A simple, responsive landing page built with Next.js. Includes a registration fo
 ```bash
 git clone https://github.com/YeruslavK/konimbo-landing-page.git
 cd landing-form
+```
 
-# 1. Install Dependencies
+### 2. Install Dependencies
+
+```bash
 # Using npm
 npm install
 
 # Using yarn
 yarn install
+```
 
-# 2. Create .env.local
+### 3. Create .env.local
+
+```bash
 Create a file named .env.local in the root of the project and add your Airtable credentials:
 
 AIRTABLE_API_KEY=your_airtable_api_key
@@ -55,12 +61,14 @@ AIRTABLE_BASE_ID=your_base_id
 AIRTABLE_TABLE_NAME=your_table_name
 
 You can find these values in your Airtable API docs.
+```
 
-# 3. Run the App Locally
+### 4. Run the App Locally
+
+```bash
 npm run dev
 
 open http://localhost:3000 in your browser.
-
 ```
 
 ---
