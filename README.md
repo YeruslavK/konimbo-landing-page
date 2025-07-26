@@ -54,7 +54,7 @@ yarn install
 ### 3. Create .env.local
 
 ```bash
-Create a file named **.env.local** in the root of the project and add your Airtable credentials:
+Create a file named ".env.local" in the root of the project and add your Airtable credentials:
 
 
 # Add in your .env.local
