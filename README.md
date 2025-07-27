@@ -87,7 +87,7 @@ The form includes 3 fields:
 
 On submit:
 
-    - Sends data to app/api/send/route.ts
+    - Sends data to app/api/submit-form/route.js
 
     - That API route formats the data and sends it to Airtable using your API key
 
