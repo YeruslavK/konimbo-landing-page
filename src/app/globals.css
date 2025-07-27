@@ -1,5 +1,5 @@
 @import "tailwindcss";
 
 body {
-  @apply bg-gradient-to-br from-emerald-100 via-emerald-50/90 to-teal-100/90 min-h-screen;
+  @apply bg-gradient-to-br from-emerald-300 via-emerald-50/90 to-teal-300/90 min-h-screen;
 }
