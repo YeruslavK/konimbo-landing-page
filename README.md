@@ -58,11 +58,17 @@ Create a file named ".env.local" in the root of the project and add your Airtabl
 
 
 # Add in your .env.local
+# You can find these values in your Airtable API docs.
 AIRTABLE_API_KEY=your_airtable_api_key
 AIRTABLE_BASE_ID=your_base_id
 AIRTABLE_TABLE_NAME=your_table_name
 
-# You can find these values in your Airtable API docs.
+# When creating an API Token in Airtable
+# Scopes
+data.records:write
+
+# Access
+Select your Table
 ```
 
 ### 4. Run the App Locally
