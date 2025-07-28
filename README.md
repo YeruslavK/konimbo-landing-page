@@ -38,7 +38,7 @@ A simple, responsive landing page built with Next.js. Includes a registration fo
 
 ```bash
 git clone https://github.com/YeruslavK/konimbo-landing-page.git
-cd landing-form
+cd konimbo-landing-form
 ```
 
 ### 2. Install Dependencies
@@ -46,9 +46,11 @@ cd landing-form
 ```bash
 # Using npm
 npm install
+npm install -D tailwindcss postcss autoprefixer
 
 # Or if youre using yarn
 yarn install
+yarn add -D tailwindcss postcss autoprefixer
 ```
 
 ### 3. Create .env.local
