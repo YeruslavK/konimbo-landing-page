@@ -1,16 +1,18 @@
-// app/api/submit-form/route.js
+// Import Next.js helper to send structured HTTP responses from the server
 import { NextResponse } from "next/server";
 
+// Handle POST requests sent to this API route (usually a form submission)
 export async function POST(request) {
   console.log("API route hit - POST request received");
 
   try {
+    // Parse the request body as JSON
     console.log("Attempting to parse request body...");
     const { name, email, message } = await request.json();
 
     console.log("Form submission received:", { name, email, message });
 
-    // Validate required fields
+    // Validate that all required fields are present
     if (!name || !email || !message) {
       console.log("Validation failed - missing fields");
       return NextResponse.json(
@@ -19,7 +21,7 @@ export async function POST(request) {
       );
     }
 
-    // Check environment variables
+    // Check that necessary Airtable environment variables are configured
     if (
       !process.env.AIRTABLE_TOKEN ||
       !process.env.AIRTABLE_BASE_ID ||
@@ -36,7 +38,7 @@ export async function POST(request) {
     console.log("Base ID:", process.env.AIRTABLE_BASE_ID);
     console.log("Table Name:", process.env.AIRTABLE_TABLE_NAME);
 
-    // Send to Airtable
+    // Send the form data to Airtable using their REST API
     const airtableResponse = await fetch(
       `https://api.airtable.com/v0/${process.env.AIRTABLE_BASE_ID}/${process.env.AIRTABLE_TABLE_NAME}`,
       {
@@ -52,8 +54,6 @@ export async function POST(request) {
                 Name: name,
                 Email: email,
                 Message: message,
-                // Add this field if you have a datetime column in Airtable
-                // 'Created': new Date().toISOString(),
               },
             },
           ],
@@ -63,6 +63,7 @@ export async function POST(request) {
 
     console.log("Airtable response status:", airtableResponse.status);
 
+    // If Airtable accepted the request successfully
     if (airtableResponse.ok) {
       const airtableData = await airtableResponse.json();
       console.log("Successfully submitted to Airtable:", airtableData);
@@ -73,6 +74,7 @@ export async function POST(request) {
         airtableData,
       });
     } else {
+      // Airtable responded with an error
       const errorText = await airtableResponse.text();
       console.error("Airtable error response:", errorText);
 
@@ -86,23 +88,11 @@ export async function POST(request) {
       );
     }
   } catch (error) {
+    // Catch any unexpected errors
     console.error("API route error:", error);
     return NextResponse.json(
       { success: false, error: "Failed to process form submission" },
       { status: 500 }
     );
   }
-}
-
-// Add a GET handler for testing
-export async function GET() {
-  return NextResponse.json({
-    message: "API route is working! Use POST to submit form data.",
-    envCheck: {
-      hasToken: !!process.env.AIRTABLE_TOKEN,
-      hasBaseId: !!process.env.AIRTABLE_BASE_ID,
-      hasTableName: !!process.env.AIRTABLE_TABLE_NAME,
-      tableName: process.env.AIRTABLE_TABLE_NAME,
-    },
-  });
 }

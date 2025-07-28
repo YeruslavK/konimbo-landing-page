@@ -1,15 +1,22 @@
 "use client";
 import React, { useState } from "react";
 
+// Main Form component - renders a contact form with name, email, and message fields
 export const Form = () => {
+  // State to store form input values (name, email, message)
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     message: "",
   });
+
+  // State to track form submission status (success, error, or empty string for no status)
   const [status, setStatus] = useState("");
+
+  // State to track if form is currently being submitted (shows loading state)
   const [isSubmitting, setIsSubmitting] = useState(false);
 
+  // Function to handle input field changes
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
@@ -18,12 +25,14 @@ export const Form = () => {
     }));
   };
 
+  // Function to handle form submission - sends data to API endpoint
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
     setStatus("");
 
     try {
+      // Send POST request to API with form data as JSON
       const response = await fetch("/api/submit-form", {
         method: "POST",
         headers: {
@@ -31,20 +40,20 @@ export const Form = () => {
         },
         body: JSON.stringify(formData),
       });
+
+      // Parse the JSON response from the API
       const result = await response.json();
 
+      // Check if submission was successful based on API response
       if (result.success) {
         setStatus("success");
-        // Only clear form data after successful API response
         setFormData({ name: "", email: "", message: "" });
       } else {
         setStatus("error");
-        // Don't clear form data on error - user keeps their input
       }
     } catch (error) {
       console.error("Form submission error:", error);
       setStatus("error");
-      // Don't clear form data on error - user keeps their input
     } finally {
       setIsSubmitting(false);
     }
@@ -52,13 +61,16 @@ export const Form = () => {
 
   return (
     <div className="w-full max-w-2xl mx-auto p-4">
+      {/* Main form container with styling and submit handler */}
       <form
         autoComplete="off"
         onSubmit={handleSubmit}
         className="bg-white p-8 rounded-2xl shadow-lg border border-gray-100 max-w-full w-full mx-auto mb-8 space-y-6 backdrop-blur-sm"
       >
+        {/* Success message - only shown when status is "success" */}
         {status === "success" && (
           <div className="text-green-700 p-4 bg-green-50 border border-green-200 rounded-xl flex items-center gap-3 animate-in slide-in-from-top-2 duration-300">
+            {/* Green checkmark icon */}
             <div className="w-5 h-5 bg-green-500 rounded-full flex items-center justify-center flex-shrink-0">
               <svg
                 className="w-3 h-3 text-white"
@@ -78,6 +90,7 @@ export const Form = () => {
           </div>
         )}
 
+        {/* Error message - only shown when status is "error" */}
         {status === "error" && (
           <div className="text-red-700 p-4 bg-red-50 border border-red-200 rounded-xl flex items-center gap-3 animate-in slide-in-from-top-2 duration-300">
             <div className="w-5 h-5 bg-red-500 rounded-full flex items-center justify-center flex-shrink-0">
@@ -99,6 +112,7 @@ export const Form = () => {
           </div>
         )}
 
+        {/* Name input field with label and icon */}
         <div className="space-y-2 group">
           <label
             htmlFor="name"
@@ -107,6 +121,7 @@ export const Form = () => {
             Name
           </label>
           <div className="relative">
+            {/* Name input field */}
             <input
               id="name"
               name="name"
@@ -118,6 +133,7 @@ export const Form = () => {
               required
               disabled={isSubmitting}
             />
+            {/* User icon in the input*/}
             <div className="absolute inset-y-0 right-4 flex items-center pointer-events-none">
               <svg
                 className="w-5 h-5 text-gray-400 group-hover:text-gray-500 transition-colors"
@@ -136,6 +152,7 @@ export const Form = () => {
           </div>
         </div>
 
+        {/* Email input field with label and icon */}
         <div className="space-y-2 group">
           <label
             htmlFor="email"
@@ -144,6 +161,7 @@ export const Form = () => {
             Email
           </label>
           <div className="relative">
+            {/* Email input field */}
             <input
               id="email"
               name="email"
@@ -155,6 +173,7 @@ export const Form = () => {
               required
               disabled={isSubmitting}
             />
+            {/* Email icon in the input*/}
             <div className="absolute inset-y-0 right-4 flex items-center pointer-events-none">
               <svg
                 className="w-5 h-5 text-gray-400 group-hover:text-gray-500 transition-colors"
@@ -173,6 +192,7 @@ export const Form = () => {
           </div>
         </div>
 
+        {/* Message textarea field with label and icon */}
         <div className="space-y-2 group">
           <label
             htmlFor="message"
@@ -181,6 +201,7 @@ export const Form = () => {
             Message
           </label>
           <div className="relative">
+            {/* Message textarea field */}
             <textarea
               id="message"
               name="message"
@@ -192,6 +213,7 @@ export const Form = () => {
               required
               disabled={isSubmitting}
             />
+            {/* Message icon in the textarea*/}
             <div className="absolute top-4 right-4 pointer-events-none">
               <svg
                 className="w-5 h-5 text-gray-400 group-hover:text-gray-500 transition-colors"
@@ -210,14 +232,17 @@ export const Form = () => {
           </div>
         </div>
 
+        {/* Submit button with loading state and animations */}
         <button
           type="submit"
           disabled={isSubmitting}
           className="w-full cursor-pointer bg-gradient-to-r from-emerald-600 via-emerald-500 to-emerald-500 text-white font-bold rounded-xl px-8 py-4 text-lg mt-6 shadow-lg transition-all duration-300 hover:from-emerald-700 hover:via-emerald-600 hover:to-emerald-600 hover:shadow-lg hover:scale-[1.02] disabled:opacity-60 disabled:cursor-not-allowed disabled:hover:from-emerald-600 disabled:hover:via-emerald-500 disabled:hover:to-emerald-500 disabled:hover:scale-100 relative overflow-hidden"
         >
+          {/* Button content container */}
           <div className="relative flex items-center justify-center gap-3">
             {isSubmitting ? (
               <>
+                {/* Loading spinner icon - only shown while submitting */}
                 <svg
                   className="animate-spin h-5 w-5 text-white"
                   fill="none"
@@ -237,10 +262,12 @@ export const Form = () => {
                     d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
                   ></path>
                 </svg>
+                {/* Loading text */}
                 <span>Submitting...</span>
               </>
             ) : (
               <>
+                {/* Default button text - shown when not submitting */}
                 <span>Send Message</span>
               </>
             )}
