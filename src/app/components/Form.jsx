@@ -1,19 +1,15 @@
 "use client";
-import React, { useState } from "react";
+import { useState } from "react";
 
-// Main Form component - renders a contact form with name, email, and message fields
 export const Form = () => {
-  // State to store form input values (name, email, message)
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     message: "",
   });
 
-  // State to track form submission status (success, error, or empty string for no status)
   const [status, setStatus] = useState("");
 
-  // State to track if form is currently being submitted (shows loading state)
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   // Function to handle input field changes
@@ -41,7 +37,6 @@ export const Form = () => {
         body: JSON.stringify(formData),
       });
 
-      // Parse the JSON response from the API
       const result = await response.json();
 
       // Check if submission was successful based on API response

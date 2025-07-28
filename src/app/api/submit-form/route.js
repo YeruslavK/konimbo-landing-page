@@ -1,4 +1,3 @@
-// Import Next.js helper to send structured HTTP responses from the server
 import { NextResponse } from "next/server";
 
 // Handle POST requests sent to this API route (usually a form submission)
