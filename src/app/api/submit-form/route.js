@@ -1,11 +1,9 @@
 import { NextResponse } from "next/server";
 
-// Handle POST requests sent to this API route (usually a form submission)
 export async function POST(request) {
   console.log("API route hit - POST request received");
 
   try {
-    // Parse the request body as JSON
     console.log("Attempting to parse request body...");
     const { name, email, message } = await request.json();
 
